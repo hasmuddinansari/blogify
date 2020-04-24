@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import SignupValidator from "./common/SignupValidator"
-
-import axios from "axios"
 import { Link } from "react-router-dom"
 
 function Register() {
@@ -28,14 +26,7 @@ function Register() {
             setError(err)
         }
         else {
-            setLoader(true)
-            axios.post("http://127.0.0.1:5000/auth/signup", state)
-                .then((res) => {
-                    console.log(res)
-                    setMsg(res.data.message)
-                    setLoader(false)
-                })
-                .catch((e) => console.log(e))
+            // setLoader(true)
         }
 
     }
