@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { LoginValidation } from "./Validation/LoginValidation"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import { loginUser } from '../../Redux/Auth/actions'
 
-
-
-function Login({ history }) {
+function Login({ history, loginUser, err, isLoggedIn }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState({})
@@ -20,11 +19,12 @@ function Login({ history }) {
             setError(err)
         }
         else {
-            history.push("/")
+            loginUser(userData)
         }
-
     }
-
+    if (!err && isLoggedIn) {
+        history.push("/")
+    }
     return (
         <div className="container p-5">
             <div className="row justify-content-center">
@@ -61,5 +61,18 @@ function Login({ history }) {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        Auth: state.auth,
+        message: state.auth.message,
+        err: state.auth.error,
+        isLoggedIn: state.auth.isLoggedIn
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        loginUser: (user_info) => dispatch(loginUser(user_info))
+    }
+}
 
-export default Login
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

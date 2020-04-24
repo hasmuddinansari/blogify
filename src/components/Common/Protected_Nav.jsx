@@ -1,12 +1,15 @@
 import React from 'react'
 import style from "./Navbar.module.css"
 import { Link } from "react-router-dom"
-let auth = true
-let name = "H"
-export default function Protected_Nav() {
+import { connect } from "react-redux"
+import { logOut } from "../../Redux/Auth/actions"
+
+
+
+function Protected_Nav({ logOut, isLoggedIn, curr_user }) {
     return (
         <>
-            {auth ? <>
+            {isLoggedIn ? <>
                 <Link
                     style={{ "textDecoration": "none" }}
                     to="/write"
@@ -20,7 +23,7 @@ export default function Protected_Nav() {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                     className={`${style.circle_btn} btn btn-dark my-1`}>
-                    {name}
+                    {curr_user.username.slice(0, 1)}
                 </button>
             </> :
 
@@ -37,10 +40,24 @@ export default function Protected_Nav() {
                     <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li className={style.ul_li}>
-                    <button className="btn btn-outline-danger">Logout</button>
+                    <button onClick={logOut} className="btn btn-outline-danger">Logout</button>
                 </li>
             </ul>
 
         </>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn,
+        curr_user: state.auth.curr_user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logOut: () => dispatch(logOut())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Protected_Nav)

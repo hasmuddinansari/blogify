@@ -5,14 +5,17 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import style from "./Editor.module.css"
+import { add_blog, curr_user_blogs, set_curr_blog } from "../../Redux/BlogCreate/actions"
+import { connect } from 'react-redux';
+import swal from 'sweetalert';
 
-const DraftEditor = ({ history }) => {
+const DraftEditor = ({ curr_blog, history, add_blog, curr_user_blogs, email, username, set_curr_blog }) => {
     const [editorState, onEditorStateChange] = useState(EditorState.createEmpty())
     const [title, setTitle] = useState("")
-
+    //collecting content and blog_info
     useEffect(() => {
-        let preview = JSON.parse(localStorage.getItem("preview"))
-        if (preview) {
+        let preview = curr_blog
+        if (Object.keys(preview).length > 0) {
             const blocksFromHtml = htmlToDraft(preview.content);
             const { contentBlocks, entityMap } = blocksFromHtml;
             const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -21,36 +24,60 @@ const DraftEditor = ({ history }) => {
             setTitle(preview.title)
         }
     }, [])
-
+    function restoreData() {
+        let content = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        let blog_info = {
+            "id": Date.now(),
+            "content": content,
+            "title": title,
+            "date": new Date().toLocaleString(),
+            "author": username,
+            "email": email,
+            "likes": 0,
+            "user_likes": []
+        }
+        return blog_info
+    }
 
     function handleSubmit() {
-        console.log(title)
-        let data = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-        localStorage.setItem("html", JSON.stringify(data))
+        let conf = window.confirm("Press ok to publish or just preview once")
+        if (conf && title) {
+            let blog_info = restoreData()
+            curr_user_blogs(email)
+            add_blog(blog_info)
+            swal("", "Blog added", "success")
+            Reseting(true)
+            set_curr_blog({})
+        }
+        else {
+            swal("", "title is required", "warning")
+        }
     }
-    function Reseting() {
-        var conf = window.confirm("Are you sure?")
+    function Reseting(conf) {
+        if (conf == undefined) {
+            let c = window.confirm("are you sure")
+            if (c) {
+                onEditorStateChange(EditorState.createEmpty())
+                setTitle("")
+                return
+            }
+        }
         if (conf) {
             onEditorStateChange(EditorState.createEmpty())
             setTitle("")
         }
         else {
-            alert("Your file is safe")
+            swal("", "your file is safe", "warning")
         }
+
     }
     function preview_blog() {
         if (title == "") {
             alert("title is required")
         }
         else {
-            let content = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-            let data = {
-                "content": content,
-                "title": title,
-                "date": new Date().toLocaleString(),
-                "author": "Ayaan"
-            }
-            localStorage.setItem("preview", JSON.stringify(data))
+            let data = restoreData()
+            set_curr_blog(data)
             history.push("/preview")
         }
     }
@@ -67,7 +94,7 @@ const DraftEditor = ({ history }) => {
                                 <img className={style.preview} src="/icons/preview.svg" alt="preview" />
                             </span>
                         </button>
-                        <button className="btn btn-danger ml-2 my-1" onClick={Reseting}>Reset</button>
+                        <button className="btn btn-danger ml-2 my-1" onClick={() => Reseting()}>Reset</button>
                     </div>
                 </div>
                 <div>
@@ -86,4 +113,20 @@ const DraftEditor = ({ history }) => {
     )
 }
 
-export default DraftEditor
+const mapStateToProps = state => {
+    return {
+        email: state.auth.curr_user.email,
+        username: state.auth.curr_user.username,
+        curr_blog: state.blogs.curr_blog
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        add_blog: (blog_detail) => dispatch(add_blog(blog_detail)),
+        curr_user_blogs: (email) => dispatch(curr_user_blogs(email)),
+        set_curr_blog: (cur_blog) => dispatch(set_curr_blog(cur_blog))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DraftEditor)

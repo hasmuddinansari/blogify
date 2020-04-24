@@ -3,9 +3,10 @@ import SignupValidator from "./Validation/SignupValidator"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { signupUser } from "../../Redux/Auth/actions"
+import swal from "sweetalert"
 
-function Register({ signupUser }) {
-    const [loader] = useState(false)
+function Register({ signupUser, err, message }) {
+    const [loader, setloader] = useState(false)
     const [state, setState] =
         useState({ "username": "", "password": "", "email": "" })
     const [error, setError] = useState({})
@@ -59,7 +60,8 @@ function Register({ signupUser }) {
 const mapStateToProps = state => {
     return {
         Auth: state.auth,
-        message: state.auth.message
+        message: state.auth.message,
+        err: state.auth.error
     }
 }
 const mapDispatchToProps = dispatch => {

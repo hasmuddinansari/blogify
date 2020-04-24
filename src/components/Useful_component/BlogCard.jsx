@@ -1,18 +1,19 @@
 import React from 'react'
 import style from "./style.module.css"
+import { Link } from "react-router-dom"
 
-export default function DashBlogCard({ title, author, date }) {
+export default function DashBlogCard({ title, author, date, likes, id }) {
     return (
         <div className="">
             <div className={`${style.myCard}`}>
-                <h3>This is test</h3>
-                <p>12/12/12 10:12:12</p>
-                <p>@ayaan</p>
+                <Link to={`/blogs/${id}`}><h3>{title}</h3></Link>
+                <p>{date}</p>
+                <p>@{author}</p>
                 <span>
                     <img src="icons/like.png" alt="like" className={style.heart} />
-                100
-            </span>
+                    {likes}
+                </span>
             </div>
-        </div>
+        </div >
     )
 }

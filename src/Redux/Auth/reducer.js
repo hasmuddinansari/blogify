@@ -1,3 +1,4 @@
+import swal from "sweetalert"
 
 const intialState = {
     isLoggedIn: false,
@@ -13,6 +14,7 @@ const reducer = (state = intialState, action) => {
         case "SIGNUP":
             let existense = state.all_user_list.some((user) => user.email === action.payload.email)
             if (!existense) {
+                swal("", "Registeration Succesfull", "success")
                 return {
                     ...state,
                     all_user_list: [...state.all_user_list, { ...action.payload }],
@@ -21,9 +23,10 @@ const reducer = (state = intialState, action) => {
                 }
             }
             else {
+                swal("", "User is alredy exist, please login", "warning")
                 return {
                     ...state,
-                    message: "User is alredy exist",
+                    message: "User is alredy exist please login",
                     error: true,
                 }
             }
@@ -35,6 +38,7 @@ const reducer = (state = intialState, action) => {
                 let requested_user = action.payload
 
                 if (user.email === requested_user.email && user.password === requested_user.password) {
+                    swal("", "Login successfully", "success")
                     return {
                         ...state,
                         isLoggedIn: true,
@@ -43,6 +47,7 @@ const reducer = (state = intialState, action) => {
                     }
                 }
                 else {
+                    swal("", "wrong password", "warning")
                     return {
                         ...state,
                         message: "wrong password",
@@ -52,6 +57,7 @@ const reducer = (state = intialState, action) => {
                 }
             }
             else {
+                swal("", "User is not registered yet", "warning")
                 return {
                     ...state,
                     message: "User is not registered yet",
@@ -60,6 +66,11 @@ const reducer = (state = intialState, action) => {
                 }
             }
 
+        case "LOGOUT":
+            return {
+                ...state,
+                isLoggedIn: false
+            }
 
 
         default: return state

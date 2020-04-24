@@ -5,6 +5,12 @@ export const signupUser = (user_info) => {
     }
 }
 
+export const logOut = () => {
+    return {
+        type: "LOGOUT",
+    }
+}
+
 export const loginUser = (user_info) => {
     return {
         type: "LOGIN",
