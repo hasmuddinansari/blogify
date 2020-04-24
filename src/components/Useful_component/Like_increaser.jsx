@@ -3,7 +3,7 @@ import style from "./style.module.css"
 import { connect } from "react-redux"
 import { do_like_on_blog } from "../../Redux/BlogCreate/actions"
 
-function Like_increaser({ count, do_like_on_blog, blog_id, curr_user }) {
+function Like_increaser({ count, do_like_on_blog, blog_id, curr_user, disabled }) {
     let srcs = ["/icons/like.png", "/icons/unlike.png"]
     const [like_index, setLike] = useState(1)
     const [no_of_likes, inc_dec_like] = useState(count)
@@ -23,7 +23,7 @@ function Like_increaser({ count, do_like_on_blog, blog_id, curr_user }) {
     }
     return (
         <div className={style.fixed_footer}>
-            <img onClick={like_me} src={srcs[like_index]} alt="like_unlike" className={style.like_img} />
+            <img disabled={disabled} onClick={like_me} src={srcs[like_index]} alt="like_unlike" className={style.like_img} />
             <span className="p-2">{no_of_likes} Loves</span>
         </div>
     )

@@ -4,19 +4,7 @@ import { Link } from "react-router-dom"
 import style from "./style.module.css"
 import Like_increaser from "./Like_increaser"
 
-// let blog = {
-//     id: 1587737729984,
-//     content: "<p>this is my first blog</p> ",
-//     title: "Hello world",
-//     date: "24/04/2020, 19:45:29",
-//     author: undefined,
-//     email: undefined,
-//     likes: 0,
-// }
-
-
-
-export default function Blog_content({ blog, getBack }) {
+export default function Blog_content({ blog, getBack, disabled }) {
     if (blog) {
         return (
             <>
@@ -37,7 +25,7 @@ export default function Blog_content({ blog, getBack }) {
                             </span>
                         </div>
                     </div>
-                    <Like_increaser count={blog.likes} blog_id={blog.id} />
+                    <Like_increaser count={blog.likes} blog_id={blog.id} disabled={disabled} />
                 </div>
             </>
         )

@@ -9,7 +9,7 @@ function Blog({ match, all_blogs }) {
     console.log(blog)
     return (
         <>
-            <Blog_content blog={blog} getBack="/" />
+            <Blog_content blog={blog} getBack="/" disabled={false} />
         </>
     )
 }
