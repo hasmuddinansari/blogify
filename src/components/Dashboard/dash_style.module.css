@@ -1,0 +1,11 @@
+.blank{
+    height:7rem;
+}
+body {
+    background:url("/images/body_bg.jpg");
+    background-attachment: fixed;
+    background-size:cover;
+}
+.heart {
+    height:10px;
+}

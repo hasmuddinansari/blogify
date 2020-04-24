@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
 .container {
-    position: "fixed";
     width:100%;
     height:auto;
     border:1px solid lightblue;
     box-shadow: 1px 2px 4px black;
     background-color: lightblue;
     font-family: 'Roboto Mono', monospace;
-    margin-bottom: 15px;
-    
 }
+
+.fixed {
+    position: fixed;
+    width: 100%;
+    display: block;
+}
+
 .fancy_btn {
     padding:5px 20px;
     height:3rem;

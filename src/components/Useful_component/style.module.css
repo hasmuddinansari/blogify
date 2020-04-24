@@ -1,0 +1,16 @@
+.blank{
+    height:7rem;
+}
+
+.myCard {
+    height:13rem;
+    width:30rem;
+    margin:10px 8px 15px 8px;
+    padding:10px;
+    border:1px solid grey;
+    background-color: white;
+    box-shadow: 4px 10px 25px black;
+}
+.heart {
+    height:3rem;
+}

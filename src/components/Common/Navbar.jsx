@@ -7,8 +7,8 @@ import Protected_Nav from "./Protected_Nav"
 
 export default function Navbar() {
     return (
-        <>
-            <nav className={`navbar navbar-expand-lg navbar-light ${style.container}`} >
+        <><div className={style.fixed}>
+            <nav className={`navbar navbar-expand-lg  navbar-light ${style.container}`} >
                 <Link to="/" className="mr-3 navbar-brand border border-dark px-3 bg-dark text-light">Blogify</Link>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </ nav>
+        </div>
         </>
     )
 }

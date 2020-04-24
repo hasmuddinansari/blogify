@@ -1,14 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
-body {
-    font-family: 'Roboto Mono', monospace;
-}
-
 .size{
     height:50vh;
     width:80vw;
 }
-
+.blank{
+    height:7rem;
+}
 .headline {
     font-family: 'Roboto Mono', monospace;
     width:80vw;
