@@ -1,26 +1,31 @@
 import React from 'react'
 import style from "./Navbar.module.css"
 import { Link } from "react-router-dom"
+import Protected_Nav from "./Protected_Nav"
 
-let auth = true
-let name = "M"
+
+
 export default function Navbar() {
     return (
         <>
-            <div className={style.container}>
-                <div className="navbar">
-                    <div className="navbar-items d-flex">
-                        <h2 className="mr-3 border border-dark px-3 bg-dark text-light">Blogify</h2>
-                        <input type="text" placeholder="Searh blogs....." className="form-control" />
-                    </div>
-                    <div className="navbar-item d-flex p-2">
-                        <Link style={{ "textDecoration": "none" }} to="/write" className={`${style.fancy_btn} mx-2`}>write a blog</Link>
+            <nav className={`navbar navbar-expand-lg navbar-light ${style.container}`} >
+                <Link to="/" className="mr-3 navbar-brand border border-dark px-3 bg-dark text-light">Blogify</Link>
 
-                        {/* condition if user is logged in then login/signup will disappear and if username's first letter will show */}
-                        {auth ? <button className="rounded-circle btn btn-dark">{name}</button> : <button className="btn btn-outline-danger">Login/Signup</button>}
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className="collapse navbar-collapse justify-content-between align-items-center" id="navbarNavAltMarkup">
+
+                    <div className="navbar-nav ">
+                        <input type="text" placeholder="Search blogs....." className="form-control p-3 nav-item" />
+                    </div>
+                    <div className="navbar-nav">
+                        <Protected_Nav />
                     </div>
                 </div>
-            </div>
+            </ nav>
         </>
     )
 }
