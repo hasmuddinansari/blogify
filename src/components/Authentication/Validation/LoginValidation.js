@@ -12,8 +12,11 @@ export function LoginValidation({ state }) {
     if (validator.isEmpty(state.password)) {
         errors["password"] = "this field is required"
     }
-    else if (state.password.length < 4) {
-        errors["password"] = "password length must be greater than 4 letters"
+    else {
+        let real_pass = "12345"
+        if (real_pass !== state.password) {
+            errors["password"] = "wrong password"
+        }
     }
     return (
         errors

@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { LoginValidation } from "./common/LoginValidation"
-import { LoginUser } from "../Redux/Auth/AuthAction"
+import { LoginValidation } from "./Validation/LoginValidation"
 import { connect } from "react-redux"
-import { Link, Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 
-function Login({ LoginUser, Auth }) {
+function Login({ history }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState({})
@@ -21,12 +20,9 @@ function Login({ LoginUser, Auth }) {
             setError(err)
         }
         else {
-            LoginUser(userData)
+            history.push("/")
         }
 
-    }
-    if (token || Auth.isLoggedIn) {
-        return <Redirect to="/" />
     }
 
     return (
@@ -48,13 +44,13 @@ function Login({ LoginUser, Auth }) {
                         <label htmlFor="email">Password</label>
                         <input
                             className="form-control"
-                            type="text"
+                            type="password"
                             onChange={(e) => { setPassword(e.target.value) }} />
 
                         {error.password && <p className="text-danger">{error.password}</p>}
 
                         <input
-                            disabled={Auth.loading}
+                            // disabled={Auth.loading}
                             type="submit" className="btn btn-success my-2" value="Login" /> <br />
 
                         <Link to="/signup">Not Registered yet?</Link>
@@ -64,16 +60,6 @@ function Login({ LoginUser, Auth }) {
         </div>
     )
 }
-const mapStateToProps = (state) => {
-    return {
-        Auth: state.Auth
-    }
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        LoginUser: user => dispatch(LoginUser(user))
-    }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
