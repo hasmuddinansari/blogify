@@ -5,10 +5,9 @@ export default function Dashboard() {
     let m = ['a', "b", "c", "d", "e", "f", "g", "h"]
     return (
         <>
-            <div className={style.blank}></div>
             <div className="container">
-                <div className="row justify-content-center align-items-center">
-                    <div className="">
+                <div className="row justify-content-center">
+                    <div className="col-lg-6 col-12">
                         {m.map((i, e) => {
                             return <BlogCard />
                         })}

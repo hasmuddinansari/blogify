@@ -8,13 +8,12 @@ export default function Blog_content({ blog, getBack }) {
     if (blog) {
         return (
             <>
-                <div className={style.blank}></div>
-                <div>
+                <div className="my-3">
                     <Link to={`/${getBack}`}
-                        className="bg-light border border-dark p-2 m-2">
+                        className="bg-light border border-dark p-2 my-3">
                         {`<< Go Back`}
                     </Link>
-                    <div className="container my-4 bg-light shadow shadow-sm p-3">
+                    <div className={`${style.blog_resize} container my-4 shadow shadow-sm p-3`}>
                         <h1>{blog.title}</h1>
                         <div className="">
                             {ReactHtmlParser(blog.content)}

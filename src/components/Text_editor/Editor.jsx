@@ -57,7 +57,6 @@ const DraftEditor = ({ history }) => {
 
     return (
         <>
-            <div className={style.blank}></div>
             <div className={`${style.margin_top} container-fluid row justify-content-center`}>
                 <div className="container row justify-content-end px-5">
                     <div className=" px-2 ">

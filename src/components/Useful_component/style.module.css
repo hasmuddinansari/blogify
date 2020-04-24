@@ -2,9 +2,8 @@
     height:7rem;
 }
 
-.myCard {
-    height:13rem;
-    width:auto;
+.myCard {   
+    height:auto;
     margin:10px 8px 15px 8px;
     padding:10px;
     border:1px solid grey;
@@ -13,4 +12,9 @@
 }
 .heart {
     height:3rem;
+}
+
+.blog_resize {
+    min-height:70vh;
+    background-color: ivory;
 }
