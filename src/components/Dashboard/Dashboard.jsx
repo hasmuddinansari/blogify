@@ -8,7 +8,7 @@ export default function Dashboard() {
             <div className={style.blank}></div>
             <div className="container">
                 <div className="row justify-content-center align-items-center">
-                    <div>
+                    <div className="">
                         {m.map((i, e) => {
                             return <BlogCard />
                         })}

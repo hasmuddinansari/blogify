@@ -4,7 +4,7 @@
 
 .myCard {
     height:13rem;
-    width:30rem;
+    width:auto;
     margin:10px 8px 15px 8px;
     padding:10px;
     border:1px solid grey;
