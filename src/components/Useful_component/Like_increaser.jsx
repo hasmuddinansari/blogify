@@ -22,12 +22,12 @@ function Like_increaser({ curr_user_likes, count, do_like_on_blog, blog_id, curr
 
 
     function like_me() {
-        if (curr_user.email == undefined) {
+        if (curr_user.email === undefined) {
             swal("", "You have to login first.", "warning")
             return
         }
 
-        if (disabled == false) {
+        if (disabled === false) {
             if (like_index) {
                 setLike(0)
                 let num = no_of_likes + 1

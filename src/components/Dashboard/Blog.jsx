@@ -4,9 +4,8 @@ import { connect } from "react-redux"
 
 function Blog({ match, all_blogs }) {
     let blog = all_blogs.find((blg) => {
-        return blg.id == match.params.id
+        return blg.id === match.params.id
     })
-    console.log(blog)
     return (
         <>
             <Blog_content blog={blog} getBack="/" disabled={false} />

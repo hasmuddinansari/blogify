@@ -54,7 +54,7 @@ const DraftEditor = ({ curr_blog, history, add_blog, curr_user_blogs, email, use
         }
     }
     function Reseting(conf) {
-        if (conf == undefined) {
+        if (conf === undefined) {
             let c = window.confirm("are you sure")
             if (c) {
                 onEditorStateChange(EditorState.createEmpty())
@@ -72,7 +72,7 @@ const DraftEditor = ({ curr_blog, history, add_blog, curr_user_blogs, email, use
 
     }
     function preview_blog() {
-        if (title == "") {
+        if (title === "") {
             alert("title is required")
         }
         else {

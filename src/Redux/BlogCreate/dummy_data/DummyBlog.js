@@ -18,15 +18,5 @@ export default [
         "email": "test@gmail.com",
         "likes": 0,
         "user_likes": []
-    },
-    {
-        "id": 1587792687711,
-        "content": "<p>test3</p>",
-        "title": "test3",
-        "date": "24/04/2020, 11:06:27",
-        "author": "test",
-        "email": "test@gmail.com",
-        "likes": 0,
-        "user_likes": []
     }
 ]

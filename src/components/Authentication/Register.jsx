@@ -3,10 +3,9 @@ import SignupValidator from "./Validation/SignupValidator"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { signupUser } from "../../Redux/Auth/actions"
-import swal from "sweetalert"
 
 function Register({ signupUser, err, message }) {
-    const [loader, setloader] = useState(false)
+    const [loader] = useState(false)
     const [state, setState] =
         useState({ "username": "", "password": "", "email": "" })
     const [error, setError] = useState({})

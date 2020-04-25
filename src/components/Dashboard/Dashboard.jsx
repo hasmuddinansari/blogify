@@ -6,7 +6,7 @@ function Dashboard({ all_blogs, search_key }) {
     let blogs = all_blogs.filter(blog => {
         return blog.title.startsWith(search_key) || blog.title.includes(search_key)
     })
-    if (blogs.length == 0) {
+    if (blogs.length === 0) {
         return <h1 className="bg-light text-center">Not Found</h1>
     }
     return (
