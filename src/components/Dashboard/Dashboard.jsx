@@ -1,6 +1,5 @@
 import React from 'react'
 import BlogCard from "../Useful_component/BlogCard"
-import style from "./dash_style.module.css"
 import { connect } from "react-redux"
 
 function Dashboard({ all_blogs, search_key }) {
