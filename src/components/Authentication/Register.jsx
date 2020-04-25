@@ -27,6 +27,7 @@ function Register({ signupUser, err, message }) {
         }
         else {
             signupUser(state)
+            setState({ "username": "", "password": "", "email": "" })
         }
 
     }
@@ -38,6 +39,7 @@ function Register({ signupUser, err, message }) {
                         {msg && <span className="text-right border p-2">{msg}</span>}
                         <h2 className="text-center">Register </h2>
                         <label htmlFor="username">Username</label>
+
                         <input name="username" className="form-control my-1" type="text" onChange={handleChange} />
                         {error.username && <p className="text-danger">{error.username}</p>}
                         <label htmlFor="email">Email</label>

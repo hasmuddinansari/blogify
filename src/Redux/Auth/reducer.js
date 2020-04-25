@@ -1,9 +1,9 @@
 import swal from "sweetalert"
 
 const intialState = {
-    isLoggedIn: true,
-    curr_user: { "username": "test", email: "test@gmail.com" },
-    all_user_list: [],
+    isLoggedIn: false,
+    curr_user: {},
+    all_user_list: [{ "username": "admin", email: "admin@gmail.com", password: "123456" }],
     message: "",
     error: false,
 }
@@ -15,9 +15,7 @@ const reducer = (state = intialState, action) => {
             let existense = state.all_user_list.some((user) => user.email === action.payload.email)
 
             //saving data to backup in local storage
-
-
-
+            // let users = JSON.parse(localStorage.getItem("users")) || []
             if (!existense) {
                 swal("", "Registeration Succesfull", "success")
                 return {
@@ -74,7 +72,8 @@ const reducer = (state = intialState, action) => {
         case "LOGOUT":
             return {
                 ...state,
-                isLoggedIn: false
+                isLoggedIn: false,
+                curr_user: {}
             }
 
 

@@ -14,7 +14,6 @@ function Like_increaser({ curr_user_likes, count, do_like_on_blog, blog_id, curr
         console.log("use effect likes", curr_user_likes)
         if (curr_user_likes.includes(curr_user.email)) {
             setLike(0)
-
         }
         else {
             setLike(1)
@@ -23,6 +22,11 @@ function Like_increaser({ curr_user_likes, count, do_like_on_blog, blog_id, curr
 
 
     function like_me() {
+        if (curr_user.email == undefined) {
+            swal("", "You have to login first.", "warning")
+            return
+        }
+
         if (disabled == false) {
             if (like_index) {
                 setLike(0)

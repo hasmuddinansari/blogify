@@ -19,6 +19,15 @@ export const set_curr_blog = (cur_blog) => {
     }
 }
 
+// this ob is help for searching the blog
+export const search_blog = (search_key) => {
+    return {
+        type: "SEARCH",
+        search_key: search_key
+    }
+}
+
+
 export const do_like_on_blog = (blog_id, email) => {
     return {
         type: "LIKE_ME",

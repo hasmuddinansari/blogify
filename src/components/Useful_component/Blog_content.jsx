@@ -18,7 +18,7 @@ export default function Blog_content({ blog, getBack, disabled }) {
                         <div className="">
                             {ReactHtmlParser(blog.content)}
                         </div>
-                        <div className="text-right">
+                        <div className="text-right my-5">
                             <span>
                                 {blog.date}--
                         {blog.author}

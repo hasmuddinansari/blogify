@@ -3,13 +3,19 @@ import BlogCard from "../Useful_component/BlogCard"
 import style from "./dash_style.module.css"
 import { connect } from "react-redux"
 
-function Dashboard({ all_blogs }) {
+function Dashboard({ all_blogs, search_key }) {
+    let blogs = all_blogs.filter(blog => {
+        return blog.title.startsWith(search_key) || blog.title.includes(search_key)
+    })
+    if (blogs.length == 0) {
+        return <h1 className="bg-light text-center">Not Found</h1>
+    }
     return (
         <>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-6 col-12">
-                        {all_blogs && all_blogs.map((blog) => {
+                        {blogs && blogs.map((blog) => {
                             return <BlogCard
                                 key={blog.id}
                                 title={blog.title}
@@ -27,7 +33,8 @@ function Dashboard({ all_blogs }) {
 }
 const mapStateToProps = state => {
     return {
-        all_blogs: state.blogs.all_blogs
+        all_blogs: state.blogs.all_blogs,
+        search_key: state.blogs.search_key
     }
 }
 

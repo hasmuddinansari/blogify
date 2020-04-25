@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { LoginValidation } from "./Validation/LoginValidation"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { loginUser } from '../../Redux/Auth/actions'
 
-function Login({ history, loginUser, err, isLoggedIn }) {
+function Login({ history, loginUser, isLoggedIn }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState({})
@@ -22,7 +22,7 @@ function Login({ history, loginUser, err, isLoggedIn }) {
             loginUser(userData)
         }
     }
-    if (!err && isLoggedIn) {
+    if (isLoggedIn) {
         history.push("/")
     }
     return (
