@@ -31,12 +31,21 @@ const reducer = (state = initialState, action) => {
             let older_blog_history = state.all_blogs.filter((blog) => {
                 return blog.id !== action.blog_id
             })
-            like_blog["likes"] = action.count
-            //if user is already liked any blog then just marking that blog is liked by curr user
-            if (!like_blog.user_likes.includes(action.email)) {
-                let user_like = like_blog["user_likes"]
-                user_like.push(action.email)
-                like_blog["user_likes"] = user_like
+            //if user is already liked any blog then just marking that blog is liked by curr use
+            if (like_blog.user_likes.indexOf(action.email) == -1) {
+                like_blog["user_likes"] = [...like_blog.user_likes, action.email]
+                like_blog["likes"] = like_blog["user_likes"].length
+            }
+            else {
+                if (like_blog.user_likes.length > 0) {
+                    let removing_like = [...like_blog.user_likes]
+                    let index = like_blog.user_likes.indexOf(action.email)
+                    if (index !== -1) {
+                        removing_like.splice(index, 1)
+                        like_blog["user_likes"] = removing_like
+                        like_blog["likes"] = like_blog["user_likes"].length
+                    }
+                }
             }
             return {
                 ...state,

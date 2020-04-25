@@ -1,8 +1,8 @@
 import swal from "sweetalert"
 
 const intialState = {
-    isLoggedIn: false,
-    curr_user: {},
+    isLoggedIn: true,
+    curr_user: { "username": "test", email: "test@gmail.com" },
     all_user_list: [],
     message: "",
     error: false,
@@ -13,6 +13,11 @@ const reducer = (state = intialState, action) => {
     switch (action.type) {
         case "SIGNUP":
             let existense = state.all_user_list.some((user) => user.email === action.payload.email)
+
+            //saving data to backup in local storage
+
+
+
             if (!existense) {
                 swal("", "Registeration Succesfull", "success")
                 return {

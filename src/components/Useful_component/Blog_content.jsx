@@ -25,7 +25,7 @@ export default function Blog_content({ blog, getBack, disabled }) {
                             </span>
                         </div>
                     </div>
-                    <Like_increaser count={blog.likes} blog_id={blog.id} disabled={disabled} />
+                    <Like_increaser count={blog.likes} blog_id={blog.id} disabled={disabled} curr_user_likes={blog.user_likes} />
                 </div>
             </>
         )

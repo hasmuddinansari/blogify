@@ -23,26 +23,22 @@ function Protected_Nav({ logOut, isLoggedIn, curr_user }) {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                     className={`${style.circle_btn} btn btn-dark my-1`}>
-                    {curr_user.username.slice(0, 1)}
+                    {curr_user.username.slice(0, 1).toUpperCase()}
                 </button>
+                <ul className="profile collapse" id="profile">
+                    <li className={style.ul_li}> {curr_user.username}</li>
+                    <li className={style.ul_li} > {curr_user.email}</li>
+                    <li className={style.ul_li}>
+                        <button onClick={logOut} className="btn btn-outline-danger">Logout</button>
+                    </li>
+                </ul>
             </> :
-
                 <Link to="/login"
                     className={`btn btn-outline-danger ${style.login_btn} my-2`}>
                     Login/Signup
                 </Link>}
-
             {/* profile section   */}
-            <ul className="profile collapse  " id="profile">
-                <li className={style.ul_li}>Hasmuddin Ansari</li>
-                <li className={style.ul_li} >mdaliansari33@gmail.com</li>
-                <li className={style.ul_li}>
-                    <Link to="/dashboard">Dashboard</Link>
-                </li>
-                <li className={style.ul_li}>
-                    <button onClick={logOut} className="btn btn-outline-danger">Logout</button>
-                </li>
-            </ul>
+
 
         </>
     )

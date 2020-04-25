@@ -19,11 +19,10 @@ export const set_curr_blog = (cur_blog) => {
     }
 }
 
-export const do_like_on_blog = (blog_id, count, email) => {
+export const do_like_on_blog = (blog_id, email) => {
     return {
         type: "LIKE_ME",
         blog_id: blog_id,
-        count: count,
         email: email
     }
 }

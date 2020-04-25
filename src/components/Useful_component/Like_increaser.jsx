@@ -1,36 +1,58 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import style from "./style.module.css"
 import { connect } from "react-redux"
 import { do_like_on_blog } from "../../Redux/BlogCreate/actions"
+import swal from "sweetalert"
 
-function Like_increaser({ count, do_like_on_blog, blog_id, curr_user, disabled }) {
+function Like_increaser({ curr_user_likes, count, do_like_on_blog, blog_id, curr_user, disabled }) {
     let srcs = ["/icons/like.png", "/icons/unlike.png"]
-    const [like_index, setLike] = useState(1)
+    const [like_index, setLike] = useState(0)
     const [no_of_likes, inc_dec_like] = useState(count)
-    function like_me() {
-        if (like_index) {
+    //checking if user is liked or not
+    useEffect(() => {
+        console.error("use effect user", curr_user)
+        console.log("use effect likes", curr_user_likes)
+        if (curr_user_likes.includes(curr_user.email)) {
             setLike(0)
-            let num = no_of_likes + 1
-            inc_dec_like(num)
-            do_like_on_blog(blog_id, num, curr_user.email)
+
         }
         else {
             setLike(1)
-            let num = no_of_likes - 1
-            inc_dec_like(num)
-            do_like_on_blog(blog_id, num, curr_user.email)
+        }
+    }, [])
+
+
+    function like_me() {
+        if (disabled == false) {
+            if (like_index) {
+                setLike(0)
+                let num = no_of_likes + 1
+                inc_dec_like(num)
+                do_like_on_blog(blog_id, curr_user.email)
+            }
+            else {
+                if (no_of_likes !== 0) {
+                    setLike(1)
+                    let num = no_of_likes - 1
+                    inc_dec_like(num)
+                    do_like_on_blog(blog_id, curr_user.email)
+                }
+            }
+        }
+        else {
+            swal("", "This page is only preview mode can't change likes.", "warning")
         }
     }
     return (
         <div className={style.fixed_footer}>
-            <img disabled={disabled} onClick={like_me} src={srcs[like_index]} alt="like_unlike" className={style.like_img} />
+            <img onClick={like_me} src={srcs[like_index]} alt="like_unlike" className={style.like_img} />
             <span className="p-2">{no_of_likes} Loves</span>
         </div>
     )
 }
 const mapDispatchToProps = dispatch => {
     return {
-        do_like_on_blog: (blog_id, count) => dispatch(do_like_on_blog(blog_id, count))
+        do_like_on_blog: (blog_id, count, email) => dispatch(do_like_on_blog(blog_id, count, email))
     }
 }
 const mapStateToProps = state => {
